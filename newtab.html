@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>New Tab By Jxdn</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="moment.min.js"></script>
+  </head>
+  <body>
+      <div id="nav"class="navbar">
+          <a title="Youtube" id="yt" href="https://youtube.com"><i class="fa fa-youtube-play" style="color:red;font-size:20px;"></i></a>
+          <a id="ytsearch"style="display:none;">
+             <form action="https://www.youtube.com/results"method="get">
+              <input name="search_query"type="text">
+             </form>
+          </a>
+          
+          <a title="Entertainment" id="ent"><i class="fa fa-film" style="font-size: 20px;"></i></a>   
+          <a title="Netflix"href="https://netflix.ca"style="display: none;"id="netflix">Netflix</a>
+          <a title="Disney"href="https://www.disneyplus.com/en-ca"style="display: none;"id="disney">Disney</a>
+          <a title="Search Google"id="search">&#x1F50D;</a>
+          <a id="inp"style="display:none;">
+             <form id="gsearch" action="https://www.google.com/search"method="get">
+              <input id="url" name="q"type="text">
+              <input type="hidden" name="sitesearch" value="">
+             </form>
+          </a>
+          <a title="Clear Browsing Data"id="del">&#128465;</a>
+          <a id="grt_t" style="float: right;"></a>
+          <a class="time" style="float: right;"></a>
+      </div>
+      <script src="newtab.js"></script>
+  </body>
+</html>

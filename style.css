@@ -1,0 +1,27 @@
+.navbar {
+    background-color: #d40202;
+    overflow: hidden;
+}
+
+.navbar a{
+    cursor: pointer;
+    float: left;
+    text-decoration: none;
+    font-family: Varela Round;
+    font-size: 16px;
+    padding: 14px 17px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    background-color: mistyrose;
+    transition: 1s;
+}
+
+#netflix {
+}
+
+#disney {
+}

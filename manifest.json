@@ -1,0 +1,21 @@
+{
+    "name": "Hasher New Tab",
+    "description": "Creates a customized new tab",
+    "version": "1.0.0",
+    "incognito": "split",
+    "chrome_url_overrides": {
+      "newtab": "newtab.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["historyHandlerCS.js"]
+        }
+    ],
+    "background": 
+      {
+        "service_worker": "historyHandler.js"
+      },
+    "permissions": ["history", "browsingData"],
+    "manifest_version": 3
+  }
