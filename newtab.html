@@ -16,7 +16,7 @@
           <a title="Youtube" id="yt" href="https://youtube.com"><i class="fa fa-youtube-play" style="color:red;font-size:20px;"></i></a>
           <a id="ytsearch"style="display:none;">
              <form action="https://www.youtube.com/results"method="get">
-              <input name="search_query"type="text">
+              <input name="search_query"type="text" placeholder="Search" class="yt-search">
              </form>
           </a>
           
@@ -26,14 +26,31 @@
           <a title="Search Google"id="search">&#x1F50D;</a>
           <a id="inp"style="display:none;">
              <form id="gsearch" action="https://www.google.com/search"method="get">
-              <input id="url" name="q"type="text">
-              <input type="hidden" name="sitesearch" value="">
+              <input id="url" name="q"type="text" placeholder="Search" class="search">
+              <input type="hidden" name="sitesearch" value="" style="display: none;">
              </form>
           </a>
           <a title="Clear Browsing Data"id="del">&#128465;</a>
           <a id="grt_t" style="float: right;"></a>
           <a class="time" style="float: right;"></a>
-      </div>
+          <div class="bookmark-wrapper">
+            <a title="Bookmark a page" style="font-size: 25px;" id="bookmark">&#43;</a>
+            <div id="bookmark5" class="bookmark-dropdown"><a style="background-color: rgb(233, 100, 100);">Bookmarks:</a></div>
+          </div>
+        </div>
+        <div id="bookmark1" class="bookmark-popup" style="display:none;">
+          <form id="bookmark2">
+            <label for="pageName">Page Name:</label>
+            <input type="text" id="pageName" name="pageName" placeholder="Enter page name" required />
+            <label for="pageUrl">Page URL:</label>
+            <input type="url" id="pageURL" name="pageURL" placeholder="Enter page URL" required />
+            <div class="buttons">
+              <button type="submit">Save Bookmark</button>
+              <button type="button" id="bookmark3">Cancel</button>
+            </div>
+            </div>
+          </form>
+        </div>
       <script src="newtab.js"></script>
   </body>
 </html>

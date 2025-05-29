@@ -3,11 +3,40 @@
     getRightNav();
     historyEvent();
     tabBG();
+    bookMark();
 });
                         
 function randomize(array){
         return array[Math.round(Math.random() * array["length"]-1)];
 };
+
+function dspElements(...args){
+    for (let e of args){
+        let parent = document.getElementById(e[0]);
+        let child = document.getElementById(e[1]);
+        parent.addEventListener("mouseover", ()=>{
+            $(`#${child.id}`).css("display", "block");
+        });
+        parent.addEventListener("mouseout", ()=>{
+            $(`#${child.id}`).css("display", "none");
+        });
+        child.addEventListener("mouseover", ()=>{
+             $(`#${child.id}`).css("display", "block");
+        });
+        child.addEventListener("mouseout", ()=>{
+             $(`#${child.id}`).css("display", "none");
+        });
+    };
+};
+
+function validateURL(url){
+    let urlRegex = /^https?:\/\/[A-Za-z0-9]+(\.[A-Za-z]{2,})+(\/[A-Za-z0-9]*)?$/;
+    if (url.match(urlRegex)) {
+        return true;
+    } else {
+        return false;
+    };
+}
 
 function getRightNav(){
     let time = moment().format('hh:mm A')
@@ -29,7 +58,7 @@ document.getElementsByClassName('navbar')[0].appendChild(t);
         }
     });
     let grt = document.getElementById('grt_t');
-    let arr = ['Hey there, how\'s going?', 'Good day to you sir!','Amazing day ahead of us'];
+    let arr = ["Hey there, how is it going?", "Good day!","Amazing day ahead of us"];
     let g;
     function getA(){
        let a = randomize(arr);
@@ -43,30 +72,11 @@ document.getElementsByClassName('navbar')[0].appendChild(t);
     grt.innerHTML = g;
 };
 
-function search(){
-    function dspElements(...args){
-        for (let e of args){
-            let parent = document.getElementById(e[0]);
-            let child = document.getElementById(e[1]);
-            parent.addEventListener("mouseover", ()=>{
-                $(`#${child.id}`).css("display", "block");
-            });
-            parent.addEventListener("mouseout", ()=>{
-                $(`#${child.id}`).css("display", "none");
-            });
-            child.addEventListener("mouseover", ()=>{
-                 $(`#${child.id}`).css("display", "block");
-            });
-            child.addEventListener("mouseout", ()=>{
-                 $(`#${child.id}`).css("display", "none");
-            });
-        };
-    };
+function search(){  
     dspElements(["search", "inp"], ["yt", "ytsearch"], ["ent", "netflix"], ["ent", "disney"], ["netflix", "disney"], ["disney", "netflix"]);
     $("#gsearch").submit((e)=>{
         let val = $("#url").val();
-        let urlregex = /^https?:\/\/([A-Za-z]|[0-9])+\.[a-z]{2,3}\/?(([A-Za-z]|[0-9])+)?$/;
-        if (val.match(urlregex)){
+        if (validateURL(val)){
             window.location.replace(val);
             e.preventDefault();
         };
@@ -128,4 +138,95 @@ function tabBG(){
     let fileN = Math.floor(Math.random()*(mx-m+1))+m;
     document.body.style.backgroundImage = `url(${fileN}.jpeg)`;
     document.body.style.backgroundSize = 'cover';
+};
+
+function bookMark(){
+    function append(n, u){
+        let b = document.createElement("a");
+        b.href = u;
+        b.innerHTML = n;
+        let p = document.createElement("button");
+        p.innerHTML = "Remove";
+        p.className = "bookmark-remove";
+        p.style.display = "none";
+        p.style.position = "relative";
+        b.appendChild(p)
+        document.getElementById("bookmark5").appendChild(b);
+        b.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            b.querySelectorAll(".bookmark-remove").forEach((button)=> { button.style.display = "none" });
+            p.style.display = "block";
+            setTimeout(()=> {p.style.display = "none"}, 3000)
+        });
+        document.addEventListener("click", (e) => {
+            if (!b.contains(e.target)) p.style.display = "none";
+        });
+        p.addEventListener("click", (e) => {
+            e.preventDefault();
+            b.remove();
+            chrome.storage.local.get("bookmarks", ( {bookmarks} ) => {
+                if (!Array.isArray(bookmarks)) return;
+                bookmarks.splice(bookmarks.indexOf(bookmarks.find((v)=> {v.name===b.textContent})), 1);
+                chrome.storage.local.set({bookmarks: bookmarks});
+            })
+        })
+    };
+    chrome.storage.local.get("bookmarks", (b) => {
+        let { bookmarks } = b;
+        if (Array.isArray(bookmarks)){
+            for (let e of bookmarks ) {
+                append(e.name, e.url);
+            };
+        };
+    });
+    $("#bookmark").hover(
+        ()=> {
+            $("#bookmark5").show();
+        },
+        ()=> {
+            $("#bookmark5").css("display", "none");
+        }
+    );
+    $(".bookmark-wrapper").hover(
+        ()=> {
+            $("#bookmark5").show();
+        },
+        ()=> {
+            $("#bookmark5").css("display", "none");
+        }
+    );
+    $("#bookmark5").hover(
+        ()=> {
+            $("#bookmark5").show();
+        },
+        ()=> {
+            $("#bookmark5").css("display", "none");
+        }
+    );
+    $("#bookmark").click(()=> {
+        $("#bookmark1").show();
+    });
+    $("#bookmark2").submit((e)=> {
+        e.preventDefault();
+        let name = $("#pageName").val();
+        let url = $("#pageURL").val();
+        console.log(name, url)
+        if (!validateURL(url)) {
+            alert("Invalid URL");
+            return;
+        };
+        append(name, url);
+        chrome.storage.local.get("bookmarks", (b) => {
+            let bookmarks = Array.isArray(b.bookmarks) ? b.bookmarks : [];
+            bookmarks.push({name, url});
+            chrome.storage.local.set({bookmarks: bookmarks});
+        });
+        $("#bookmark1").css("display", "none");
+        $("#pageName").val("");
+        $("#pageURL").val("");
+    });
+    $("#bookmark3").click((e)=> {
+        e.preventDefault();
+        $("#bookmark1").css("display", "none");
+    });
 };

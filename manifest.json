@@ -16,6 +16,6 @@
       {
         "service_worker": "historyHandler.js"
       },
-    "permissions": ["history", "browsingData"],
+    "permissions": ["history", "browsingData", "storage"],
     "manifest_version": 3
   }

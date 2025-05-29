@@ -1,27 +1,158 @@
 .navbar {
     background-color: #d40202;
-    overflow: hidden;
-}
-
-.navbar a{
+    overflow: visible;
+    position: relative;
+  }
+  
+  .navbar a {
     cursor: pointer;
     float: left;
     text-decoration: none;
-    font-family: Varela Round;
+    font-family: 'Varela Round', sans-serif;
     font-size: 16px;
     padding: 14px 17px;
     text-align: center;
     color: white;
     font-weight: bold;
+    align-items: center;
+  }
+  
+  .navbar a:hover {
+    background-color: mistyrose;
+    transition: 1s;
+  }
+  
+  .bookmark-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 2px solid #d40202;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    width: 320px;
+    z-index: 1000;
+  }
+  
+  .bookmark-popup form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bookmark-popup label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #d40202;
+  }
+  
+  .bookmark-popup input[type='text'],
+  .bookmark-popup input[type='url'] {
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border: 1.5px solid #d40202;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .bookmark-popup input[type='text']:focus,
+  .bookmark-popup input[type='url']:focus {
+    border-color: #a00000;
+  }
+  
+  .bookmark-popup .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .bookmark-popup button {
+    background-color: #d40202;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .bookmark-popup button:hover {
+    background-color: #a00000;
+  }
+  
+  .bookmark-popup button#cancelBookmark {
+    background-color: #666;
+  }
+  
+  .bookmark-popup button#cancelBookmark:hover {
+    background-color: #444;
+  }
+
+.bookmark-wrapper {
+    position: relative;
+    display: inline-block;
 }
 
-.navbar a:hover {
+.bookmark-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #d40202;
+    min-width: 180px;
+    border: 1px solid #e07676;
+    border-radius: 8px;
+    z-index: 1000;
+    top: 100%;
+    left: 0;
+    font-family: 'Varela Round', sans-serif;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.bookmark-dropdown a {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    color: white;    
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Varela Round', sans-serif;
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    overflow: visible;
+    padding-right: 10px;
+    white-space: nowrap;
+}
+
+.bookmark-dropdown a:hover {
     background-color: mistyrose;
     transition: 1s;
 }
 
-#netflix {
+.bookmark-remove {
+    position: absolute;
+    top: 50%;
+    left: 100%;              
+    transform: translateY(-50%);
+    background-color: #d40202;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+    display: none;
 }
 
-#disney {
+.bookmark-remove:hover {
+    background-color: #a00000;
 }
+ 
