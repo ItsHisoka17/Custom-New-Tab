@@ -142,25 +142,22 @@ function tabBG(){
 
 function bookMark(){
     function append(n, u){
+        let existingLinks = document.querySelectorAll("#bookmark5 a");
+        for (let link of existingLinks) {
+            if (link.href === u || link.textContent.replace("x", "").trim() === n.trim()) {
+            return;;
+        }
+    }
         let b = document.createElement("a");
         b.href = u;
+        b.target = "_blank"
         b.innerHTML = n;
         let p = document.createElement("button");
-        p.innerHTML = "Remove";
+        p.innerHTML = "x";
+        p.title = "Remove Bookmark"
         p.className = "bookmark-remove";
-        p.style.display = "none";
-        p.style.position = "relative";
         b.appendChild(p)
         document.getElementById("bookmark5").appendChild(b);
-        b.addEventListener("contextmenu", (e) => {
-            e.preventDefault();
-            b.querySelectorAll(".bookmark-remove").forEach((button)=> { button.style.display = "none" });
-            p.style.display = "block";
-            setTimeout(()=> {p.style.display = "none"}, 3000)
-        });
-        document.addEventListener("click", (e) => {
-            if (!b.contains(e.target)) p.style.display = "none";
-        });
         p.addEventListener("click", (e) => {
             e.preventDefault();
             b.remove();
