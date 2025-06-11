@@ -150,7 +150,6 @@ function bookMark(){
     }
         let b = document.createElement("a");
         b.href = u;
-        b.target = "_blank"
         b.innerHTML = n;
         let p = document.createElement("button");
         p.innerHTML = "x";
