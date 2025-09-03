@@ -136,7 +136,7 @@ function tabBG(){
     let m = Math.ceil(1);
     let mx = Math.floor(11);
     let fileN = Math.floor(Math.random()*(mx-m+1))+m;
-    document.body.style.backgroundImage = `url(${fileN}.jpeg)`;
+    document.body.style.backgroundImage = `url(public/${fileN}.jpeg)`;
     document.body.style.backgroundSize = 'cover';
 };
 
